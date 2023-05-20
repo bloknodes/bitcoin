@@ -5,7 +5,7 @@ services:
     build: .
     container_name: bitcoind
     restart: unless-stopped
-    cpus: "1.0"
+    cpus: 1.0
     mem_limit: "512M"
     ports:
       # - 8332:8332 # mainnet rpcport
