@@ -11,8 +11,9 @@ RUN wget https://bitcoincore.org/bin/bitcoin-core-${SW_VERSION}/bitcoin-${SW_VER
 FROM debian:bullseye-slim
 
 COPY --from=builder /src/bitcoind /usr/bin/bitcoind
+COPY bin/run.sh /usr/bin/run.sh
+RUN chmod +x /usr/bin/run.sh
 COPY configs/bitcoin-mainnet.conf /etc/bitcoin/bitcoin-mainnet.conf
 COPY configs/bitcoin-testnet.conf /etc/bitcoin/bitcoin-testnet.conf
-COPY bin/run.sh /usr/bin/run.sh
 
 CMD ["/usr/bin/run.sh"]
