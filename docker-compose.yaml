@@ -7,6 +7,8 @@ services:
     restart: unless-stopped
     cpus: 1.0
     mem_limit: "512M"
+    stop_signal: SIGINT
+    stop_grace_period: 2m # wait 2m before sending SIGKILL
     ports:
       # - 8332:8332 # mainnet rpcport
       - 18332:18332 # testnet rpcport
@@ -14,6 +16,11 @@ services:
       - bloknodes-network
     volumes:
       - bloknodes-volume:/blockchain
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
 networks:
   bloknodes-network:
